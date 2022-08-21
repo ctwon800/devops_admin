@@ -120,6 +120,7 @@ class UserGroupsViewset(mixins.RetrieveModelMixin,
     serializer_class = GroupSerializer
     permission_classes = [DjangoModelPermissions]
 
+
     def retrieve(self, request, *args, **kwargs):
         user_obj = self.get_object()
         queryset = user_obj.groups.all()
@@ -135,7 +136,9 @@ class UserGroupsViewset(mixins.RetrieveModelMixin,
     def update(self, request, *args, **kwargs):
         user_obj = self.get_object()
         gids = request.data.get("gid", [])
-        user_obj.groups = Group.objects.filter(id__in=gids)
+        # user_obj.groups = Group.objects.filter(id__in=gids)
+        # 多对多处理
+        user_obj.groups.set(Group.objects.filter(id__in=gids))
         return Response(status=status.HTTP_204_NO_CONTENT)
 
     def get_queryset(self):
