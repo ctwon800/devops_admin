@@ -17,16 +17,21 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from rest_framework.documentation import include_docs_urls
+from cmdb.views import GetAliyunInstance
 
 route = DefaultRouter()
 
 from users.router import user_router
 from permissions.router import permission_router
 from menu.router import menu_router
+from configure.router import configure_router
+from cmdb.router import cmdb_router
 
 route.registry.extend(user_router.registry)
 route.registry.extend(permission_router.registry)
 route.registry.extend(menu_router.registry)
+route.registry.extend(configure_router.registry)
+route.registry.extend(cmdb_router.registry)
 
 
 from rest_framework_simplejwt.views import (
@@ -40,4 +45,5 @@ urlpatterns = [
     path('docs/', include_docs_urls("运维平台接口文档")),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/updatealiyuninstance/', GetAliyunInstance, name='updatealiyuninstance'),
 ]
