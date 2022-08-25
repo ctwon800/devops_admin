@@ -10,3 +10,11 @@ djangorestframework 3.13.1
 
 
 目前正在开发中
+
+完成的功能：
+1. 用户的登录新增
+![img.png](img.png)
+2. 前后端分离后权限的控制
+![img_1.png](img_1.png)
+3. cmdb的实例获取
+![img_2.png](img_2.png)
